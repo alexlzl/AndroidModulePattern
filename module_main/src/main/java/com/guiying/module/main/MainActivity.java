@@ -13,7 +13,6 @@ import com.guiying.module.common.utils.ToastUtils;
 /**
  * <p>类说明</p>
  *
- * @author 张华洋 2017/7/1 13:13
  * @version V1.2.0
  * @name MainActivity
  */

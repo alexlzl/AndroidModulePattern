@@ -16,6 +16,9 @@ allprojects {
     addRepos(repositories)
     // Android dependency 'com.android.support:design' has different version for the compile (25.3.1) and runtime (25.4.0) classpath.
     // You should manually set the same version via DependencyResolution
+    /**
+     * 除了allprojects()之外，Project还提供了subprojects()方法用于配置所有的子Project（不包含根Project）。比如，我们可以定义Task来只输出各个子Project的名字
+     */
     subprojects {
         project.configurations.all {
             resolutionStrategy.eachDependency { details ->
@@ -24,6 +27,19 @@ allprojects {
                     details.useVersion  "27.0.2"
                 }
             }
+        }
+    }
+    /**
+     * 在Gradle中，我们可以通过根Project的allprojects()方法将配置一次性地应用于所有的Project，
+     * 当然也包括定义Task。比如，在root-project的build.gradle中，我们可以做以下定义：
+     */
+    task allTask << {
+        println project.name
+    }
+
+    configure(allprojects.findAll { it.name.endsWith('news') }) {
+        allTask << {
+            println 'this is a sub project'
         }
     }
 
